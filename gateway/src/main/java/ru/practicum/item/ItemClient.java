@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import ru.practicum.item.dto.ItemDto;
 import java.util.Map;
 
 @Slf4j
-@PropertySource("classpath:application.properties")
 @Service
 public class ItemClient extends BaseClient {
 

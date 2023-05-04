@@ -10,7 +10,6 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.client.BaseClient;
 import ru.practicum.user.dto.RequestUserDto;
 
-//@PropertySource("classpath:application.properties")
 @Service
 public class UserClient extends BaseClient {
 
