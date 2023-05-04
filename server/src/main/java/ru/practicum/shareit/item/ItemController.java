@@ -7,9 +7,6 @@ import ru.practicum.shareit.item.dto.ItemOutDtoWithDate;
 import ru.practicum.shareit.item.dto.OutputCommentDto;
 import ru.practicum.shareit.item.service.ItemService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
@@ -30,21 +27,21 @@ public class ItemController {
 
     @GetMapping
     public List<ItemOutDtoWithDate> getUsersItems(@RequestHeader(value = "X-Sharer-User-Id") Integer ownerId,
-                                                  @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero Integer from,
-                                                  @RequestParam(name = "size", defaultValue = "10") @Positive Integer size) {
+                                                  @RequestParam(name = "from", defaultValue = "0") Integer from,
+                                                  @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return itemService.getUsersItems(ownerId, from, size);
 
     }
 
     @GetMapping("/search")
     public List<ItemDto> getItemsByContextSearch(@RequestParam("text") String context,
-                                                 @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero Integer from,
-                                                 @RequestParam(name = "size", defaultValue = "10") @Positive Integer size) {
+                                                 @RequestParam(name = "from", defaultValue = "0") Integer from,
+                                                 @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return itemService.getItemsByContextSearch(context, from, size);
     }
 
     @PostMapping
-    public ItemDto createItem(@RequestBody @Valid ItemDto itemDto, @RequestHeader(value = "X-Sharer-User-Id") Integer userId) {
+    public ItemDto createItem(@RequestBody ItemDto itemDto, @RequestHeader(value = "X-Sharer-User-Id") Integer userId) {
         itemDto.setOwner(userId);
         return itemService.createItem(itemDto);
     }
@@ -59,7 +56,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/comment")
-    public OutputCommentDto addComment(@RequestBody @Valid InputCommentDto commentDto,
+    public OutputCommentDto addComment(@RequestBody InputCommentDto commentDto,
                                        @PathVariable Integer itemId,
                                        @RequestHeader(value = "X-Sharer-User-Id") Integer authorId) {
         commentDto.setItemId(itemId);

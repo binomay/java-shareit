@@ -7,8 +7,6 @@ import lombok.Setter;
 import ru.practicum.shareit.user.model.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,17 +21,13 @@ public class Comment {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 50)
-    @NotNull
     @Column(name = "text", nullable = false, length = 50)
     private String text;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
